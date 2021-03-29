@@ -1,23 +1,27 @@
 from tabulate import tabulate
 from datetime import datetime
 
-rows_in_plane = []
+rows_in_plane = " "
 
 total = []
-a = []
+a = 0
 number_of_tickets = 0
-ticket_class = ["ECONOMY", "FIRST CLASS", "BUSINESS"]
 header = "Name", "Age", "Gender", "Ticket Class", "Date and Time"
 
 while True:
 
     number_of_ticket = int(input("How many seats are you buying:>>"))
+    a += number_of_ticket
+    if a > 100:
+        print("There are no enough seat available")
+        break
 
     for i in range(number_of_ticket):
         name = str.upper(input("Type your full name as it appears in your passport:>>>"))
         age = input("Type your age:>>")
         gender = input("M or F:>>")
         ticket_ = str.upper(input("Select your ticket class: ECONOMY | FIRST CLASS | BUSINESS:>>"))
+
         today = datetime.now()
         total.append([name, age, gender, ticket_, today.strftime("%d/%m/%Y %H:%M:%S")])
 
@@ -31,7 +35,9 @@ while True:
     print("\n")
     print(tabulate(total, headers=header))
     print("\n\nThese are the number of seats you've booked")
-    print(rows_in_plane)
+    print(rows_in_plane, end="\t")
     print("\nThe number of seats available are:>>", 100 - len(rows_in_plane))
 
     break
+
+print("\nThank you for using our service")
